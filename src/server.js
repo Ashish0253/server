@@ -65,7 +65,13 @@ async function search(term, location, sortBy) {
         });
 
         // console.log(yelpResponse);
-        return yelpResponse;
+        return {
+          statusCode: 203,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: yelpResponse,
+        };
       }
     }
   } catch (error) {
