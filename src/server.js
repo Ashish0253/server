@@ -1,20 +1,25 @@
 const express = require("express");
 const cors = require("cors");
 
+const serverless = require("serverless-http");
+
 const app = express();
+const router = express.Router();
+
 app.use(express.json());
 
 app.use(cors());
+app.use("/.netlify/functions/server", router);
 
-app.listen(5000, () => {
-  console.log("Server started on port 5000");
-});
+// app.listen(5000, () => {
+//   console.log("Server started on port 5000");
+// });
 
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
   res.status(200).json("Server is running");
 });
 
-app.post("/yelp", express.json(), (req, res) => {
+router.post("/yelp", express.json(), (req, res) => {
   const term = req.body.term;
   const location = req.body.location;
   const sortBy = req.body.sortBy;
@@ -67,3 +72,6 @@ async function search(term, location, sortBy) {
     console.log(error);
   }
 }
+
+module.exports = app;
+module.exports.handler = serverless(app);
