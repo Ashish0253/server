@@ -10,8 +10,8 @@ app.listen(5000, () => {
   console.log("Server started on port 5000");
 });
 
-app.get("/api", (req, res) => {
-  res.json({ users: ["userOne", "userTwo", "userThree"] });
+app.get("/", (req, res) => {
+  res.status(200).json("Server is running");
 });
 
 app.post("/yelp", express.json(), (req, res) => {
