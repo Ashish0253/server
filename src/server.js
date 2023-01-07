@@ -6,9 +6,11 @@ const serverless = require("serverless-http");
 const app = express();
 const router = express.Router();
 
-router.use(express.json());
+app.use(express.json());
 
-router.use(cors());
+app.use(cors());
+
+app.use("/.netlify/functions/server", router);
 
 // app.listen(5000, () => {
 //   console.log("Server started on port 5000");
@@ -78,8 +80,6 @@ async function search(term, location, sortBy) {
     console.log(error);
   }
 }
-
-app.use("/.netlify/functions/server", router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
