@@ -23,10 +23,10 @@ router.get("/", (req, res) => {
 });
 
 //ye wala code h
-router.get("/yelp", express.json(), (req, res) => {
-  const term = req.headers["itemname"];
-  const location = req.headers["location"];
-  const sortBy = req.headers["sortby"];
+router.post("/yelp", express.json(), (req, res) => {
+  const term = req.body.term;
+  const location = req.body.location;
+  const sortBy = req.body.sortBy;
 
   async function apiCall() {
     res.json(await search(term, location, sortBy));
