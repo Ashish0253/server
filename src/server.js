@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const fetch = require("node-fetch");
+const fetch = require("cross-fetch");
+// import fetch from "node-fetch";
 
 const serverless = require("serverless-http");
 
