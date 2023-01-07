@@ -6,19 +6,19 @@ const serverless = require("serverless-http");
 const app = express();
 const router = express.Router();
 
-app.use(express.json());
+router.use(express.json());
 
-app.use(cors());
-app.use("/.netlify/functions/server", router);
+router.use(cors());
 
 // app.listen(5000, () => {
 //   console.log("Server started on port 5000");
 // });
 
 router.get("/", (req, res) => {
-  res.status(200).json("Server is running");
+  res.status(203).send("Server is running");
 });
 
+//ye wala code h
 router.post("/yelp", express.json(), (req, res) => {
   const term = req.body.term;
   const location = req.body.location;
@@ -78,6 +78,8 @@ async function search(term, location, sortBy) {
     console.log(error);
   }
 }
+
+app.use("/.netlify/functions/server", router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
